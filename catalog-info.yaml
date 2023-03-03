@@ -1,9 +1,9 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: Roadie
-  title: Sample Service # optional, human readable component name
-  description: My first Backstage catalog item.
+  name: HandySnacks
+  title: HandySnakcs Sample # optional, human readable component name
+  description: Handysnacks Configuration Files.
 spec:
   type: service
   owner: user:terryashley@costco.com
