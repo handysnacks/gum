@@ -6,5 +6,5 @@ metadata:
   description: My first Backstage catalog item.
 spec:
   type: service
-  owner: user:callipuram@costco.com
-  lifecycle: experimental
+  owner: user:terryashley@costco.com
+  lifecycle: production
