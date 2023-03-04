@@ -1,13 +1,12 @@
----
 apiVersion: backstage.io/v1alpha1
-kind: Component
+kind: API
 metadata:
   name: Depot Application
-  title: DepotApointmentAPI
+  title: DepotAppointmentAPI
   description: Request to record Appointments.
 spec:
   type: service
-  owner: user:terryashley@costco.com
+  owner: user:callipuram@costco.com
   lifecycle: production
 swagger: "2.0"
 info:
