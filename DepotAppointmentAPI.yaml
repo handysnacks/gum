@@ -19,19 +19,6 @@ basePath: "/depotAppointmentAPI/v1"
 produces: 
   - "application/json"
   - "application/xml"
-security:
-  - costcoAPIKey: []
-  - costcoAccessTokenPasswordFlow:
-      - 'https://api-adt.api.np.costco.com/'
-      - 'https://api-qat.api.np.costco.com/'
-      - 'https://api-spt.api.np.costco.com/'
-      - 'https://api.costco.com/'
-  - costcoAccessTokenPasswordAccessTokenFlow:
-      - 'https://api-adt.api.np.costco.com/'
-      - 'https://api-qat.api.np.costco.com/'
-      - 'https://api-spt.api.np.costco.com/'
-      - 'https://api.costco.com/'
-  - costcoBasicAuth: []
 paths: 
   /appointments: 
     post: 
@@ -76,22 +63,7 @@ paths:
           in: "body"
           schema: 
             $ref: "#/definitions/CreateAppointmentRequestType"                        
-      security:
-        - costcoAPIKey: []
-        - costcoAccessTokenPasswordFlow:
-            - 'https://api-sandbox.api.np.costco.com/'
-            - 'https://api-adt.api.np.costco.com/'
-            - 'https://api-qat.api.np.costco.com/'
-            - 'https://api-spt.api.np.costco.com/'
-            - 'https://api.costco.com/'
-        - costcoAccessTokenPasswordAccessTokenFlow:
-            - 'https://api-sandbox.api.np.costco.com/'
-            - 'https://api-adt.api.np.costco.com/'
-            - 'https://api-qat.api.np.costco.com/'
-            - 'https://api-spt.api.np.costco.com/'
-            - 'https://api.costco.com/'
-        - costcoBasicAuth: [] 
-      responses: 
+responses: 
         200: 
           description: ""
           schema: 
@@ -153,22 +125,7 @@ paths:
         - name: "body"
           in: "body"
           schema: 
-            $ref: "#/definitions/UpdateAppointmentRequestType"                        
-      security:
-        - costcoAPIKey: []
-        - costcoAccessTokenPasswordFlow:
-            - 'https://api-sandbox.api.np.costco.com/'
-            - 'https://api-adt.api.np.costco.com/'
-            - 'https://api-qat.api.np.costco.com/'
-            - 'https://api-spt.api.np.costco.com/'
-            - 'https://api.costco.com/'
-        - costcoAccessTokenPasswordAccessTokenFlow:
-            - 'https://api-sandbox.api.np.costco.com/'
-            - 'https://api-adt.api.np.costco.com/'
-            - 'https://api-qat.api.np.costco.com/'
-            - 'https://api-spt.api.np.costco.com/'
-            - 'https://api.costco.com/'
-        - costcoBasicAuth: [] 
+            $ref: "#/definitions/UpdateAppointmentRequestType"                         
       responses: 
         200: 
           description: ""
@@ -227,21 +184,6 @@ paths:
           description: "Allows the client to specify the time at which the request was sent."
           required: false
           type: "string"
-      security:
-        - costcoAPIKey: []
-        - costcoAccessTokenPasswordFlow:
-            - 'https://api-sandbox.api.np.costco.com/'
-            - 'https://api-adt.api.np.costco.com/'
-            - 'https://api-qat.api.np.costco.com/'
-            - 'https://api-spt.api.np.costco.com/'
-            - 'https://api.costco.com/'
-        - costcoAccessTokenPasswordAccessTokenFlow:
-            - 'https://api-sandbox.api.np.costco.com/'
-            - 'https://api-adt.api.np.costco.com/'
-            - 'https://api-qat.api.np.costco.com/'
-            - 'https://api-spt.api.np.costco.com/'
-            - 'https://api.costco.com/'
-        - costcoBasicAuth: [] 
       responses: 
         200: 
           description: ""
@@ -312,21 +254,6 @@ paths:
           description: "Allows the client to specify the time at which the request was sent."
           required: false
           type: "string"
-      security:
-        - costcoAPIKey: []
-        - costcoAccessTokenPasswordFlow:
-            - 'https://api-sandbox.api.np.costco.com/'
-            - 'https://api-adt.api.np.costco.com/'
-            - 'https://api-qat.api.np.costco.com/'
-            - 'https://api-spt.api.np.costco.com/'
-            - 'https://api.costco.com/'
-        - costcoAccessTokenPasswordAccessTokenFlow:
-            - 'https://api-sandbox.api.np.costco.com/'
-            - 'https://api-adt.api.np.costco.com/'
-            - 'https://api-qat.api.np.costco.com/'
-            - 'https://api-spt.api.np.costco.com/'
-            - 'https://api.costco.com/'
-        - costcoBasicAuth: [] 
       responses: 
         200: 
           description: ""
@@ -384,21 +311,6 @@ paths:
           description: "Allows the client to specify the time at which the request was sent."
           required: false
           type: "string"
-      security:
-        - costcoAPIKey: []
-        - costcoAccessTokenPasswordFlow:
-            - 'https://api-sandbox.api.np.costco.com/'
-            - 'https://api-adt.api.np.costco.com/'
-            - 'https://api-qat.api.np.costco.com/'
-            - 'https://api-spt.api.np.costco.com/'
-            - 'https://api.costco.com/'
-        - costcoAccessTokenPasswordAccessTokenFlow:
-            - 'https://api-sandbox.api.np.costco.com/'
-            - 'https://api-adt.api.np.costco.com/'
-            - 'https://api-qat.api.np.costco.com/'
-            - 'https://api-spt.api.np.costco.com/'
-            - 'https://api.costco.com/'
-        - costcoBasicAuth: [] 
       responses: 
         200: 
           description: ""
@@ -973,33 +885,5 @@ definitions:
         description: "Human-readable descriptive text corresponding to the 'ErrorCode' value provided."          
     required: 
       - "statusCode"
-securityDefinitions:
-  costcoAPIKey:
-    type: apiKey
-    name: client_id
-    in: query
-  costcoAccessTokenPasswordFlow:
-    type: oauth2
-    description: OAuth2 Password Grant
-    flow: password
-    tokenUrl: 'https://api-adt.costco.com/aad/v1/token'
-    scopes:
-      'https://api-sandbox.api.np.costco.com/': JWT token scope for Sandbox API Gateway
-      'https://api-adt.api.np.costco.com/': JWT token scope for ADT API Gateway
-      'https://api-qat.api.np.costco.com/': JWT token scope for ADT API Gateway
-      'https://api-spt.api.np.costco.com/': JWT token scope for ADT API Gateway
-      'https://api.costco.com/': JWT token scope for ADT API Gateway
-  costcoAccessTokenPasswordAccessTokenFlow:
-    type: oauth2
-    description: OAuth2 Authorization Token Grant
-    flow: accessCode
-    authorizationUrl: 'https://api-adt.costco.com/aad/v1/authorization'
-    tokenUrl: 'https://api-adt.costco.com/aad/v1/token'
-    scopes:
-      'https://api-sandbox.api.np.costco.com/': JWT token scope for Sandbox API Gateway
-      'https://api-adt.api.np.costco.com/': JWT token scope for ADT API Gateway
-      'https://api-qat.api.np.costco.com/': JWT token scope for ADT API Gateway
-      'https://api-spt.api.np.costco.com/': JWT token scope for ADT API Gateway
-      'https://api.costco.com/': JWT token scope for ADT API Gateway
-  costcoBasicAuth:
-    type: basic 
+      
+    
