@@ -1,3 +1,4 @@
+---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -9,881 +10,931 @@ spec:
   owner: user:terryashley@costco.com
   lifecycle: production
 swagger: "2.0"
-info: 
-  title: "DepotAppointmentAPI"
-  version: "v1"
-host: "api.costco.com"
-schemes: 
-  - "https"
-basePath: "/depotAppointmentAPI/v1"
-produces: 
-  - "application/json"
-  - "application/xml"
-paths: 
-  /appointments: 
-    post: 
-      summary: "createAppointments"
+info:
+  title: DepotAppointmentAPI
+  version: v1
+host: api.costco.com
+schemes:
+  - https
+basePath: /depotAppointmentAPI/v1
+produces:
+  - application/json
+  - application/xml
+paths:
+  /appointments:
+    post:
+      summary: createAppointments
       tags:
         - appointment
-      description: "Request to record Appointments"
-      parameters: 
-        - name: "Accept"
-          in: "header"
-          description: "Specifies the media/content type requested by the client."
+      description: Request to record Appointments
+      parameters:
+        - name: Accept
+          in: header
+          description: Specifies the media/content type requested by the client.
           required: false
-          type: "array"
-          items: 
-            type: "string"                  
-        - name: "costco.LocaleCode"
-          in: "header"
-          description: "Specifies the locale codes (languages) desired by the client."
-          required: false
-          type: "string"                  
-        - name: "costco.SendingApplication"
-          in: "header"
-          description: "Allows the client to identify itself for tracking/logging purposes."
-          required: false
-          type: "string"        
-        - name: "costco.TrackingId"
-          in: "header"
-          description: "Allows the client to identify an individual transaction; this value should be globally unique for each request. Backend integration components should propagate this value on every downstream request in order to properly correlate the entire transaction."
-          required: true
-          type: "string"        
-        - name: "costco.UserId"
-          in: "header"
-          description: "Allows the client to specify the user for which the call is being performed; this is intended for logging/tracking purposes only in cases where the user cannot be identified from the security context. Security mechanisms should never rely on this value."
-          required: false
-          type: "string"        
-        - name: "costco.Timestamp"
-          in: "header"
-          description: "Allows the client to specify the time at which the request was sent."
-          required: false
-          type: "string"        
-        - name: "body"
-          in: "body"
-          schema: 
-            $ref: "#/definitions/CreateAppointmentRequestType"                        
-responses: 
-        200: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                  
-        400: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                  
-        500: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                              
-  /appointments/{id}: 
-    put: 
-      summary: "updateAppointment"
-      tags:
-        - appointment
-      description: "Request to update an Appointment"
-      parameters: 
-        - name: "id"
-          in: "path"
-          description: "Identifies Appointment ID"
-          required: true
-          type: "string"        
-          minLength: 1
-          maxLength: 10
-        - name: "Accept"
-          in: "header"
-          description: "Specifies the media/content type requested by the client."
-          required: false
-          type: "array"
-          items: 
-            type: "string"                  
-        - name: "costco.LocaleCode"
-          in: "header"
-          description: "Specifies the locale codes (languages) desired by the client."
-          required: false
-          type: "string"                  
-        - name: "costco.SendingApplication"
-          in: "header"
-          description: "Allows the client to identify itself for tracking/logging purposes."
-          required: false
-          type: "string"        
-        - name: "costco.TrackingId"
-          in: "header"
-          description: "Allows the client to identify an individual transaction; this value should be globally unique for each request. Backend integration components should propagate this value on every downstream request in order to properly correlate the entire transaction."
-          required: true
-          type: "string"        
-        - name: "costco.UserId"
-          in: "header"
-          description: "Allows the client to specify the user for which the call is being performed; this is intended for logging/tracking purposes only in cases where the user cannot be identified from the security context. Security mechanisms should never rely on this value."
-          required: false
-          type: "string"        
-        - name: "costco.Timestamp"
-          in: "header"
-          description: "Allows the client to specify the time at which the request was sent."
-          required: false
-          type: "string"        
-        - name: "body"
-          in: "body"
-          schema: 
-            $ref: "#/definitions/UpdateAppointmentRequestType"                         
-      responses: 
-        200: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                  
-        400: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                  
-        500: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                            
-    delete: 
-      summary: "deleteAppointment"
-      tags:
-        - appointment
-      description: "Request to delete an Appointment"
-      parameters: 
-        - name: "id"
-          in: "path"
-          description: "Identifies Appointment ID"
-          required: true
-          type: "string"
-          minLength: 1
-          maxLength: 10
-        - name: "Accept"
-          in: "header"
-          description: "Specifies the media/content type requested by the client."
-          required: false
-          type: "array"
-          items: 
-            type: "string"                  
-        - name: "costco.LocaleCode"
-          in: "header"
-          description: "Specifies the locale codes (languages) desired by the client."
-          required: false
-          type: "string"                  
-        - name: "costco.SendingApplication"
-          in: "header"
-          description: "Allows the client to identify itself for tracking/logging purposes."
-          required: false
-          type: "string"        
-        - name: "costco.TrackingId"
-          in: "header"
-          description: "Allows the client to identify an individual transaction; this value should be globally unique for each request. Backend integration components should propagate this value on every downstream request in order to properly correlate the entire transaction."
-          required: true
-          type: "string"        
-        - name: "costco.UserId"
-          in: "header"
-          description: "Allows the client to specify the user for which the call is being performed; this is intended for logging/tracking purposes only in cases where the user cannot be identified from the security context. Security mechanisms should never rely on this value."
-          required: false
-          type: "string"        
-        - name: "costco.Timestamp"
-          in: "header"
-          description: "Allows the client to specify the time at which the request was sent."
-          required: false
-          type: "string"
-      responses: 
-        200: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                  
-        400: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                  
-        500: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                              
-  /purchaseOrder: 
-    get: 
-      summary: "getPurchaseOrder"
-      tags:
-        - purchaseOrder
-      description: "Request to retrieve a particular Purchase Order Number"
-      parameters: 
-        - name: "appointmentPONumber"
-          in: "query"
-          description: "Defines Appointment PO Number"
-          required: true
-          type: "array"
+          type: array
           items:
-            type: "integer"
-            format: "int64"
-            minimum: 1
-            maximum: 999999999999
-          maximum: 20
-        - name: "languageFlag"
-          in: "query"
-          description: "Defines Language Flag"
-          type: "string" 
+            type: string
+        - name: costco.LocaleCode
+          in: header
+          description: Specifies the locale codes (languages) desired by the client.
+          required: false
+          type: string
+        - name: costco.SendingApplication
+          in: header
+          description: Allows the client to identify itself for tracking/logging purposes.
+          required: false
+          type: string
+        - name: costco.TrackingId
+          in: header
+          description: Allows the client to identify an individual transaction; this value
+            should be globally unique for each request. Backend integration
+            components should propagate this value on every downstream request
+            in order to properly correlate the entire transaction.
           required: true
-          minLength: 1
-          maxLength: 5
-        - name: "Accept"
-          in: "header"
-          description: "Specifies the media/content type requested by the client."
+          type: string
+        - name: costco.UserId
+          in: header
+          description: Allows the client to specify the user for which the call is being
+            performed; this is intended for logging/tracking purposes only in
+            cases where the user cannot be identified from the security context.
+            Security mechanisms should never rely on this value.
           required: false
-          type: "array"
-          items: 
-            type: "string"                  
-        - name: "costco.LocaleCode"
-          in: "header"
-          description: "Specifies the locale codes (languages) desired by the client."
+          type: string
+        - name: costco.Timestamp
+          in: header
+          description: Allows the client to specify the time at which the request was sent.
           required: false
-          type: "string"                  
-        - name: "costco.SendingApplication"
-          in: "header"
-          description: "Allows the client to identify itself for tracking/logging purposes."
-          required: false
-          type: "string"        
-        - name: "costco.TrackingId"
-          in: "header"
-          description: "Allows the client to identify an individual transaction; this value should be globally unique for each request. Backend integration components should propagate this value on every downstream request in order to properly correlate the entire transaction."
-          required: true
-          type: "string"        
-        - name: "costco.UserId"
-          in: "header"
-          description: "Allows the client to specify the user for which the call is being performed; this is intended for logging/tracking purposes only in cases where the user cannot be identified from the security context. Security mechanisms should never rely on this value."
-          required: false
-          type: "string"        
-        - name: "costco.Timestamp"
-          in: "header"
-          description: "Allows the client to specify the time at which the request was sent."
-          required: false
-          type: "string"
-      responses: 
-        200: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/PurchaseOrderResponseType"                  
-        400: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                  
-        500: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                              
-  /heartbeat: 
-    get: 
-      summary: "heartbeat"
-      tags:
-        - heartbeat
-      description: "Provides monitoring capabilities to verify service status "
-      parameters: 
-        - name: "aliveAndWell"
-          in: "query"
-          description: ""
-          required: false
-          type: "boolean"        
-        - name: "Accept"
-          in: "header"
-          description: "Specifies the media/content type requested by the client."
-          required: false
-          type: "array"
-          items: 
-            type: "string"                  
-        - name: "costco.LocaleCode"
-          in: "header"
-          description: "Specifies the locale codes (languages) desired by the client."
-          required: false
-          type: "string"                  
-        - name: "costco.SendingApplication"
-          in: "header"
-          description: "Allows the client to identify itself for tracking/logging purposes."
-          required: false
-          type: "string"        
-        - name: "costco.TrackingId"
-          in: "header"
-          description: "Allows the client to identify an individual transaction; this value should be globally unique for each request. Backend integration components should propagate this value on every downstream request in order to properly correlate the entire transaction."
-          required: true
-          type: "string"        
-        - name: "costco.UserId"
-          in: "header"
-          description: "Allows the client to specify the user for which the call is being performed; this is intended for logging/tracking purposes only in cases where the user cannot be identified from the security context. Security mechanisms should never rely on this value."
-          required: false
-          type: "string"        
-        - name: "costco.Timestamp"
-          in: "header"
-          description: "Allows the client to specify the time at which the request was sent."
-          required: false
-          type: "string"
-      responses: 
-        200: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/HeartbeatResponseType"                  
-        400: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                  
-        500: 
-          description: ""
-          schema: 
-            $ref: "#/definitions/ServiceResultType"                              
-definitions: 
-  UpdateAppointmentRequestType: 
-    properties: 
-      locationNumber: 
-        type: "integer"
-        format: "int32"
-        description: "Defines Location Number"   
-        minimum: 1
-        maximum: 99999
-      appointmentType: 
-        type: "string"
-        description: "Defines Appointment Type"      
+          type: string
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/CreateAppointmentRequestType"
+responses:
+  "200":
+    description: ""
+    schema:
+      $ref: "#/definitions/ServiceResultType"
+  "400":
+    description: ""
+    schema:
+      $ref: "#/definitions/ServiceResultType"
+  "500":
+    description: ""
+    schema:
+      $ref: "#/definitions/ServiceResultType"
+"/appointments/{id}":
+  put:
+    summary: updateAppointment
+    tags:
+      - appointment
+    description: Request to update an Appointment
+    parameters:
+      - name: id
+        in: path
+        description: Identifies Appointment ID
+        required: true
+        type: string
+        minLength: 1
+        maxLength: 10
+      - name: Accept
+        in: header
+        description: Specifies the media/content type requested by the client.
+        required: false
+        type: array
+        items:
+          type: string
+      - name: costco.LocaleCode
+        in: header
+        description: Specifies the locale codes (languages) desired by the client.
+        required: false
+        type: string
+      - name: costco.SendingApplication
+        in: header
+        description: Allows the client to identify itself for tracking/logging purposes.
+        required: false
+        type: string
+      - name: costco.TrackingId
+        in: header
+        description: Allows the client to identify an individual transaction; this value
+          should be globally unique for each request. Backend integration
+          components should propagate this value on every downstream request in
+          order to properly correlate the entire transaction.
+        required: true
+        type: string
+      - name: costco.UserId
+        in: header
+        description: Allows the client to specify the user for which the call is being
+          performed; this is intended for logging/tracking purposes only in
+          cases where the user cannot be identified from the security context.
+          Security mechanisms should never rely on this value.
+        required: false
+        type: string
+      - name: costco.Timestamp
+        in: header
+        description: Allows the client to specify the time at which the request was sent.
+        required: false
+        type: string
+      - name: body
+        in: body
+        schema:
+          $ref: "#/definitions/UpdateAppointmentRequestType"
+    responses:
+      "200":
+        description: ""
+        schema:
+          $ref: "#/definitions/ServiceResultType"
+      "400":
+        description: ""
+        schema:
+          $ref: "#/definitions/ServiceResultType"
+      "500":
+        description: ""
+        schema:
+          $ref: "#/definitions/ServiceResultType"
+  delete:
+    summary: deleteAppointment
+    tags:
+      - appointment
+    description: Request to delete an Appointment
+    parameters:
+      - name: id
+        in: path
+        description: Identifies Appointment ID
+        required: true
+        type: string
+        minLength: 1
+        maxLength: 10
+      - name: Accept
+        in: header
+        description: Specifies the media/content type requested by the client.
+        required: false
+        type: array
+        items:
+          type: string
+      - name: costco.LocaleCode
+        in: header
+        description: Specifies the locale codes (languages) desired by the client.
+        required: false
+        type: string
+      - name: costco.SendingApplication
+        in: header
+        description: Allows the client to identify itself for tracking/logging purposes.
+        required: false
+        type: string
+      - name: costco.TrackingId
+        in: header
+        description: Allows the client to identify an individual transaction; this value
+          should be globally unique for each request. Backend integration
+          components should propagate this value on every downstream request in
+          order to properly correlate the entire transaction.
+        required: true
+        type: string
+      - name: costco.UserId
+        in: header
+        description: Allows the client to specify the user for which the call is being
+          performed; this is intended for logging/tracking purposes only in
+          cases where the user cannot be identified from the security context.
+          Security mechanisms should never rely on this value.
+        required: false
+        type: string
+      - name: costco.Timestamp
+        in: header
+        description: Allows the client to specify the time at which the request was sent.
+        required: false
+        type: string
+    responses:
+      "200":
+        description: ""
+        schema:
+          $ref: "#/definitions/ServiceResultType"
+      "400":
+        description: ""
+        schema:
+          $ref: "#/definitions/ServiceResultType"
+      "500":
+        description: ""
+        schema:
+          $ref: "#/definitions/ServiceResultType"
+/purchaseOrder:
+  get:
+    summary: getPurchaseOrder
+    tags:
+      - purchaseOrder
+    description: Request to retrieve a particular Purchase Order Number
+    parameters:
+      - name: appointmentPONumber
+        in: query
+        description: Defines Appointment PO Number
+        required: true
+        type: array
+        items:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 999999999999
+        maximum: 20
+      - name: languageFlag
+        in: query
+        description: Defines Language Flag
+        type: string
+        required: true
         minLength: 1
         maxLength: 5
-      loadTypeCode: 
-        type: "string"
-        description: "Defines Load Type Code"
+      - name: Accept
+        in: header
+        description: Specifies the media/content type requested by the client.
+        required: false
+        type: array
+        items:
+          type: string
+      - name: costco.LocaleCode
+        in: header
+        description: Specifies the locale codes (languages) desired by the client.
+        required: false
+        type: string
+      - name: costco.SendingApplication
+        in: header
+        description: Allows the client to identify itself for tracking/logging purposes.
+        required: false
+        type: string
+      - name: costco.TrackingId
+        in: header
+        description: Allows the client to identify an individual transaction; this value
+          should be globally unique for each request. Backend integration
+          components should propagate this value on every downstream request in
+          order to properly correlate the entire transaction.
+        required: true
+        type: string
+      - name: costco.UserId
+        in: header
+        description: Allows the client to specify the user for which the call is being
+          performed; this is intended for logging/tracking purposes only in
+          cases where the user cannot be identified from the security context.
+          Security mechanisms should never rely on this value.
+        required: false
+        type: string
+      - name: costco.Timestamp
+        in: header
+        description: Allows the client to specify the time at which the request was sent.
+        required: false
+        type: string
+    responses:
+      "200":
+        description: ""
+        schema:
+          $ref: "#/definitions/PurchaseOrderResponseType"
+      "400":
+        description: ""
+        schema:
+          $ref: "#/definitions/ServiceResultType"
+      "500":
+        description: ""
+        schema:
+          $ref: "#/definitions/ServiceResultType"
+/heartbeat:
+  get:
+    summary: heartbeat
+    tags:
+      - heartbeat
+    description: "Provides monitoring capabilities to verify service status "
+    parameters:
+      - name: aliveAndWell
+        in: query
+        description: ""
+        required: false
+        type: boolean
+      - name: Accept
+        in: header
+        description: Specifies the media/content type requested by the client.
+        required: false
+        type: array
+        items:
+          type: string
+      - name: costco.LocaleCode
+        in: header
+        description: Specifies the locale codes (languages) desired by the client.
+        required: false
+        type: string
+      - name: costco.SendingApplication
+        in: header
+        description: Allows the client to identify itself for tracking/logging purposes.
+        required: false
+        type: string
+      - name: costco.TrackingId
+        in: header
+        description: Allows the client to identify an individual transaction; this value
+          should be globally unique for each request. Backend integration
+          components should propagate this value on every downstream request in
+          order to properly correlate the entire transaction.
+        required: true
+        type: string
+      - name: costco.UserId
+        in: header
+        description: Allows the client to specify the user for which the call is being
+          performed; this is intended for logging/tracking purposes only in
+          cases where the user cannot be identified from the security context.
+          Security mechanisms should never rely on this value.
+        required: false
+        type: string
+      - name: costco.Timestamp
+        in: header
+        description: Allows the client to specify the time at which the request was sent.
+        required: false
+        type: string
+    responses:
+      "200":
+        description: ""
+        schema:
+          $ref: "#/definitions/HeartbeatResponseType"
+      "400":
+        description: ""
+        schema:
+          $ref: "#/definitions/ServiceResultType"
+      "500":
+        description: ""
+        schema:
+          $ref: "#/definitions/ServiceResultType"
+definitions:
+  UpdateAppointmentRequestType:
+    properties:
+      locationNumber:
+        type: integer
+        format: int32
+        description: Defines Location Number
+        minimum: 1
+        maximum: 99999
+      appointmentType:
+        type: string
+        description: Defines Appointment Type
+        minLength: 1
+        maxLength: 5
+      loadTypeCode:
+        type: string
+        description: Defines Load Type Code
         minLength: 1
         maxLength: 5
       isDropTrailer:
-        type: "boolean"   
-        description: "Defines Drop Trailer Y/N?"
-      trailerOrContainerNumber: 
-        type: "string"
+        type: boolean
+        description: Defines Drop Trailer Y/N?
+      trailerOrContainerNumber:
+        type: string
         description: "Defines identification of Trailer/Container #"
         minLength: 1
         maxLength: 15
-      appointmentDate: 
-        type: "string"
-        format: "date"
-        description: "Defines Appointment Date in YYYY-MM-DD format"      
-      appointmentStartTime: 
-        type: "string"
-        description: "Defines Appointment Start Time"      
+      appointmentDate:
+        type: string
+        format: date
+        description: Defines Appointment Date in YYYY-MM-DD format
+      appointmentStartTime:
+        type: string
+        description: Defines Appointment Start Time
         minLength: 1
         maxLength: 5
-      appointmentNumber: 
-        type: "integer"
-        format: "int32"
-        description: "Defines Appointment Number"      
+      appointmentNumber:
+        type: integer
+        format: int32
+        description: Defines Appointment Number
         minimum: 1
         maximum: 99999
-      appointmentDuration: 
-        type: "integer"
-        format: "int32"
-        description: "Defines Appointment Duration"      
+      appointmentDuration:
+        type: integer
+        format: int32
+        description: Defines Appointment Duration
         maximum: 99999
-      carrierNotes: 
-        type: "string"
-        description: "Defines Carrier Notes"      
+      carrierNotes:
+        type: string
+        description: Defines Carrier Notes
         maxLength: 250
-      internalNotes: 
-        type: "string"
-        description: "Defines Internal Notes"      
+      internalNotes:
+        type: string
+        description: Defines Internal Notes
         maxLength: 250
-      carrierCode: 
-        type: "string"
-        description: "Defines Carrier Code"      
+      carrierCode:
+        type: string
+        description: Defines Carrier Code
         maxLength: 4
-      carrierName: 
-        type: "string"
-        description: "Defines Carrier Name"      
+      carrierName:
+        type: string
+        description: Defines Carrier Name
         maxLength: 128
-      tmsUser: 
-        type: "string"
-        description: "Defines TMS User"      
+      tmsUser:
+        type: string
+        description: Defines TMS User
         minLength: 1
         maxLength: 40
-      pODetails: 
-        type: "array"
-        items: 
-          $ref: "#/definitions/PurchaseOrderEventDetailType"        
-        description: "Defines Purchase Order Event Details"          
-    required: 
-      - "locationNumber"
-      - "appointmentType"
-      - "loadTypeCode"
-      - "dropTrailer"
-      - "appointmentDate"
-      - "appointmentStartTime"
-      - "appointmentNumber"
-      - "tmsUser"
-  CreateAppointmentRequestType: 
-    properties: 
-      id: 
-        type: "integer"
-        format: "int64"
-        description: "Defines Appointment ID"      
+      pODetails:
+        type: array
+        items:
+          $ref: "#/definitions/PurchaseOrderEventDetailType"
+        description: Defines Purchase Order Event Details
+    required:
+      - locationNumber
+      - appointmentType
+      - loadTypeCode
+      - dropTrailer
+      - appointmentDate
+      - appointmentStartTime
+      - appointmentNumber
+      - tmsUser
+  CreateAppointmentRequestType:
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Defines Appointment ID
         minimum: 1
         maximum: 9999999999
-      locationNumber: 
-        type: "integer"
-        format: "int32"
-        description: "Defines Location Number"      
+      locationNumber:
+        type: integer
+        format: int32
+        description: Defines Location Number
         minimum: 1
         maximum: 99999
-      appointmentType: 
-        type: "string"
-        description: "Defines Appointment Type"      
+      appointmentType:
+        type: string
+        description: Defines Appointment Type
         minLength: 1
         maxLength: 5
-      loadTypeCode: 
-        type: "string"
-        description: "Defines Load Type Code"      
+      loadTypeCode:
+        type: string
+        description: Defines Load Type Code
         minLength: 1
         maxLength: 5
-      isDropTrailer: 
-        type: "boolean"   
-        description: "Defines Drop Trailer Y/N"      
-      trailerOrContainerNumber: 
-        type: "string"
+      isDropTrailer:
+        type: boolean
+        description: Defines Drop Trailer Y/N
+      trailerOrContainerNumber:
+        type: string
         description: "Defines identification of Trailer/Container #"
         minLength: 1
-        maxLength: 15     
-      appointmentDate: 
-        type: "string"
-        format: "date"
-        description: "Defines Appointment Date in YYYY-MM-DD format"      
-      appointmentStartTime: 
-        type: "string"
-        description: "Defines Appointment Start Time"      
+        maxLength: 15
+      appointmentDate:
+        type: string
+        format: date
+        description: Defines Appointment Date in YYYY-MM-DD format
+      appointmentStartTime:
+        type: string
+        description: Defines Appointment Start Time
         minLength: 1
         maxLength: 5
-      appointmentNumber: 
-        type: "integer"
-        format: "int32"
-        description: "Defines Appointment Number"      
+      appointmentNumber:
+        type: integer
+        format: int32
+        description: Defines Appointment Number
         minimum: 1
         maximum: 99999
-      appointmentDuration: 
-        type: "integer"
-        format: "int32"
-        description: "! not documented !"      
+      appointmentDuration:
+        type: integer
+        format: int32
+        description: "! not documented !"
         maximum: 99999
-      carrierNotes: 
-        type: "string"
-        description: "Defines Carrier Notes"      
-        maxLength: 250     
-      internalNotes: 
-        type: "string"
-        description: "Defines Internal Notes"      
-        maxLength: 250     
-      carrierCode: 
-        type: "string"
-        description: "Defines Carrier Code"      
+      carrierNotes:
+        type: string
+        description: Defines Carrier Notes
+        maxLength: 250
+      internalNotes:
+        type: string
+        description: Defines Internal Notes
+        maxLength: 250
+      carrierCode:
+        type: string
+        description: Defines Carrier Code
         maxLength: 4
-      carrierName: 
-        type: "string"
-        description: "Defines Carrier Name"      
+      carrierName:
+        type: string
+        description: Defines Carrier Name
         maxLength: 128
-      tmsUser: 
-        type: "string"
-        description: "Defines TMS User"      
+      tmsUser:
+        type: string
+        description: Defines TMS User
         maxLength: 40
-      pODetails: 
-        type: "array"
-        items: 
-          $ref: "#/definitions/PurchaseOrderDetailType"        
-        description: "Defines Purchase Order Event Details"          
-    required: 
-      - "id"
-      - "locationNumber"
-      - "appointmentType"
-      - "loadTypeCode"
-      - "isDropTrailer"
-      - "appointmentDate"
-      - "appointmentStartTime"
-      - "appointmentNumber"
-      - "tmsUser"      
-      - "pODetails"  
-  HeartbeatResponseType: 
-    properties: 
-      statusCode: 
-        type: "string"
-        description: "! not documented !"      
-      trackingId: 
-        type: "string"
-        description: "! not documented !"      
-      errorCode: 
-        type: "string"
-        description: "! not documented !"      
-      sendingApplication: 
-        type: "string"
-        description: "! not documented !"      
-      components: 
-        type: "array"
-        items: 
-          $ref: "#/definitions/ComponentType"        
-        description: "! not documented !"          
-    required: 
-      - "statusCode"      
-  PurchaseOrderResponseType: 
-    properties: 
-      context: 
-        $ref: "#/definitions/ServiceResultContextType"
-        description: "Represents the contextual information associated with the result."
-      poRetrievalDetail: 
-        type: "array"
-        items: 
-          $ref: "#/definitions/PurchaseOrderRetrievalDetailType"        
-        description: "Defines Purchase Order Retrieval array set"
-    required: 
-      - "context"
-  PurchaseOrderRetrievalDetailType: 
-    properties: 
-      appointmentPONumber: 
-        type: "integer"
-        format: "int64"
-        description: "Defines TMS Appointment Purchase Order Number"     
-      appointmentPOLocation: 
-        type: "integer"
-        format: "int32"
-        description: "Defines TMS Appointment Purchase Order Location"  
-      appointmentPOLocationName: 
-        type: "string"
-        description: "Defines Name of PO Location"          
-      isValidPO: 
-        type: "boolean"   
-        description: "Defines if Valid PO"      
-      warningMessage: 
-        type: "string"
-        description: "Defines any Error Message"      
-      regions: 
-        type: "array"
-        items: 
-          $ref: "#/definitions/RegionArrayType"        
-        description: "Defines an array of Regions for PO distribution"      
-      department: 
-        type: "integer"
-        format: "int32"
-        description: "Defines Department Number"      
-      departmentDescription: 
-        type: "string"
-        description: "Defines Department Description in English/French"      
-      vendorNumber: 
-        type: "integer"
-        format: "int32"
-        description: "Defines Vendor Number"      
-      vendorNumberSuffix: 
-        type: "integer"
-        format: "int32"
-        description: "Defines Vendor Number Suffix"      
-      vendorName: 
-        type: "string"
-        description: "Defines Vendor Name"      
-      arrivalDate: 
-        type: "string"
-        format: "date"
-        description: "Defines Appointment PO Arrival Date"      
-      freightTerm: 
-        type: "string"
-        description: "Defines Freight Terms"      
-      isBuyInPO: 
-        type: "boolean"   
-        description: "Defines if it is a BuyIn PO Y/N"      
-      isBackOrder: 
-        type: "boolean"
-        description: "Defines if it is on BackOrder Y/N"      
-      itemCount: 
-        type: "integer"
-        format: "int32"
-        description: "Defines Item Count"      
-      isAutoDistributePO: 
-        type: "boolean"   
-        description: "Defines is it is an Auto Distribute PO Y/N"      
-      isPODistributeStatus: 
-        type: "boolean"   
-        description: "Defines if it is PO Fully Distributed Y/N"      
-      poInstructions: 
-        type: "array"
-        items: 
-          type: "string"        
-          description: "Defines array of PO Instructions from INPOINP"      
-      groupPONumbers: 
-        type: "array"
-        items: 
-          type: "integer"       
-          format: "int64"
-          description: "Defines array of PO's that should be in the on the same appointment"      
-      isImportFlag: 
-        type: "boolean"
-        description: "Defines if it is an Import PO  Y/N"      
-      countryCode: 
-        type: "integer"
-        format: "int32"
-        description: "Defines Country Code"      
-      isMatrixOverride: 
-        type: "boolean"
-        description: "Defines if it is a Matrix Override PO  Y/N"      
-      plannedShipDate: 
-        type: "string"
-        format: "date"
-        description: "Defines Planned Ship Date"      
-      buyerNumber: 
-        type: "integer"
-        format: "int32"
-        description: "Defines Buyer Number"      
-      buyerName: 
-        type: "string"
-        description: "Defines Buyer Name"      
-      itemDistributionUnit: 
-        type: "string"
-        description: "Defines Item Distribution Type"      
-      items: 
-        type: "array"
-        items: 
-          $ref: "#/definitions/ItemArrayType"        
-        description: "Defines an array of Items"          
-  ServiceResultType: 
-    properties: 
-      context: 
-        $ref: "#/definitions/ServiceResultContextType"
-        description: "Represents the contextual information associated with the result."          
-    required: 
-      - "context"      
-  ServiceRequestContextType: 
-    properties: 
-      messageName: 
-        type: "string"
-        description: "A unique name describing the message. All messages of the same type should carry the same 'MesageName' value. "      
-      timestamp: 
-        type: "string"
-        format: "date-time"
-        description: "The time-stamp at which the message was created."      
-      sendingApplication: 
-        type: "string"
-        description: "The name of the client/application sending the message. It allows client to uniquely identify itself for tracking or logging purposes."      
-      trackingId: 
-        type: "string"
-        description: "A globally unique id used to identify and correlate the transaction through various layers of distributed architecture. All endpoints processing this message should propagate the same tracking id value to downstream service calls or created messages, and for request and response message pattern, the same tracking id value should be returned with the response message."      
-      userId: 
-        type: "string"
-        description: "Represents the user on behalf of whom the request is to be performed. Any value passed on the message will be overridden by the actual user principal name present in the runtime security context."      
-      localeCode: 
-        type: "string"
-        description: "The locale code(s) in which the response details and error messages should be returned (for localized services)."            
-  PurchaseOrderDetailType: 
+      pODetails:
+        type: array
+        items:
+          $ref: "#/definitions/PurchaseOrderDetailType"
+        description: Defines Purchase Order Event Details
+    required:
+      - id
+      - locationNumber
+      - appointmentType
+      - loadTypeCode
+      - isDropTrailer
+      - appointmentDate
+      - appointmentStartTime
+      - appointmentNumber
+      - tmsUser
+      - pODetails
+  HeartbeatResponseType:
     properties:
-      purchaseOrderType: 
-        type: "string"
-        description: "Defines Purchase Order Type - Either PO or MISC"      
+      statusCode:
+        type: string
+        description: "! not documented !"
+      trackingId:
+        type: string
+        description: "! not documented !"
+      errorCode:
+        type: string
+        description: "! not documented !"
+      sendingApplication:
+        type: string
+        description: "! not documented !"
+      components:
+        type: array
+        items:
+          $ref: "#/definitions/ComponentType"
+        description: "! not documented !"
+    required:
+      - statusCode
+  PurchaseOrderResponseType:
+    properties:
+      context:
+        $ref: "#/definitions/ServiceResultContextType"
+        description: Represents the contextual information associated with the result.
+      poRetrievalDetail:
+        type: array
+        items:
+          $ref: "#/definitions/PurchaseOrderRetrievalDetailType"
+        description: Defines Purchase Order Retrieval array set
+    required:
+      - context
+  PurchaseOrderRetrievalDetailType:
+    properties:
+      appointmentPONumber:
+        type: integer
+        format: int64
+        description: Defines TMS Appointment Purchase Order Number
+      appointmentPOLocation:
+        type: integer
+        format: int32
+        description: Defines TMS Appointment Purchase Order Location
+      appointmentPOLocationName:
+        type: string
+        description: Defines Name of PO Location
+      isValidPO:
+        type: boolean
+        description: Defines if Valid PO
+      warningMessage:
+        type: string
+        description: Defines any Error Message
+      regions:
+        type: array
+        items:
+          $ref: "#/definitions/RegionArrayType"
+        description: Defines an array of Regions for PO distribution
+      department:
+        type: integer
+        format: int32
+        description: Defines Department Number
+      departmentDescription:
+        type: string
+        description: Defines Department Description in English/French
+      vendorNumber:
+        type: integer
+        format: int32
+        description: Defines Vendor Number
+      vendorNumberSuffix:
+        type: integer
+        format: int32
+        description: Defines Vendor Number Suffix
+      vendorName:
+        type: string
+        description: Defines Vendor Name
+      arrivalDate:
+        type: string
+        format: date
+        description: Defines Appointment PO Arrival Date
+      freightTerm:
+        type: string
+        description: Defines Freight Terms
+      isBuyInPO:
+        type: boolean
+        description: Defines if it is a BuyIn PO Y/N
+      isBackOrder:
+        type: boolean
+        description: Defines if it is on BackOrder Y/N
+      itemCount:
+        type: integer
+        format: int32
+        description: Defines Item Count
+      isAutoDistributePO:
+        type: boolean
+        description: Defines is it is an Auto Distribute PO Y/N
+      isPODistributeStatus:
+        type: boolean
+        description: Defines if it is PO Fully Distributed Y/N
+      poInstructions:
+        type: array
+        items:
+          type: string
+          description: Defines array of PO Instructions from INPOINP
+      groupPONumbers:
+        type: array
+        items:
+          type: integer
+          format: int64
+          description: Defines array of PO's that should be in the on the same appointment
+      isImportFlag:
+        type: boolean
+        description: Defines if it is an Import PO  Y/N
+      countryCode:
+        type: integer
+        format: int32
+        description: Defines Country Code
+      isMatrixOverride:
+        type: boolean
+        description: Defines if it is a Matrix Override PO  Y/N
+      plannedShipDate:
+        type: string
+        format: date
+        description: Defines Planned Ship Date
+      buyerNumber:
+        type: integer
+        format: int32
+        description: Defines Buyer Number
+      buyerName:
+        type: string
+        description: Defines Buyer Name
+      itemDistributionUnit:
+        type: string
+        description: Defines Item Distribution Type
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/ItemArrayType"
+        description: Defines an array of Items
+  ServiceResultType:
+    properties:
+      context:
+        $ref: "#/definitions/ServiceResultContextType"
+        description: Represents the contextual information associated with the result.
+    required:
+      - context
+  ServiceRequestContextType:
+    properties:
+      messageName:
+        type: string
+        description: "A unique name describing the message. All messages of the same
+          type should carry the same 'MesageName' value. "
+      timestamp:
+        type: string
+        format: date-time
+        description: The time-stamp at which the message was created.
+      sendingApplication:
+        type: string
+        description: The name of the client/application sending the message. It allows
+          client to uniquely identify itself for tracking or logging purposes.
+      trackingId:
+        type: string
+        description: A globally unique id used to identify and correlate the transaction
+          through various layers of distributed architecture. All endpoints
+          processing this message should propagate the same tracking id value to
+          downstream service calls or created messages, and for request and
+          response message pattern, the same tracking id value should be
+          returned with the response message.
+      userId:
+        type: string
+        description: Represents the user on behalf of whom the request is to be
+          performed. Any value passed on the message will be overridden by the
+          actual user principal name present in the runtime security context.
+      localeCode:
+        type: string
+        description: The locale code(s) in which the response details and error messages
+          should be returned (for localized services).
+  PurchaseOrderDetailType:
+    properties:
+      purchaseOrderType:
+        type: string
+        description: Defines Purchase Order Type - Either PO or MISC
         minLength: 1
-        maxLength: 10    
-      purchaseOrderNumber: 
-        type: "integer"
-        format: "int64"
-        description: "Defines Purchase Order Number"      
+        maxLength: 10
+      purchaseOrderNumber:
+        type: integer
+        format: int64
+        description: Defines Purchase Order Number
         minimum: 1
         maximum: 999999999999
-      miscPurchaseOrderNumber: 
-        type: "string"
-        description: "Defines MISC Purchase Order Number - Mandatory if PO Type is MISC"      
+      miscPurchaseOrderNumber:
+        type: string
+        description: Defines MISC Purchase Order Number - Mandatory if PO Type is MISC
         minLength: 1
         maxLength: 12
-      miscPurchaseOrderDescription: 
-        type: "string"
-        description: "Defines MISC Purchase Order Description - Mandatory if PO Type is MISC"      
+      miscPurchaseOrderDescription:
+        type: string
+        description: Defines MISC Purchase Order Description - Mandatory if PO Type is MISC
         minLength: 1
         maxLength: 25
-      miscPurchaseOrderNotes: 
-        type: "string"
-        description: "Defines MISC Purchase Order Notes - Mandatory if PO Type is MISC"      
+      miscPurchaseOrderNotes:
+        type: string
+        description: Defines MISC Purchase Order Notes - Mandatory if PO Type is MISC
         minLength: 1
         maxLength: 250
-      quantity: 
-        type: "number"
-        format: "float"
-        description: "Defines Unit of Measure Quantity"      
+      quantity:
+        type: number
+        format: float
+        description: Defines Unit of Measure Quantity
         minimum: 0.01
         maximum: 9999999.99
-      unitOfMeasureCode: 
-        type: "string"
-        description: "Defines Unit of Measure Code"          
+      unitOfMeasureCode:
+        type: string
+        description: Defines Unit of Measure Code
         minLength: 1
         maxLength: 5
     required:
-      - "purchaseOrderType"
-      - "quantity"
-      - "unitOfMeasureCode"   
-  PurchaseOrderEventDetailType: 
+      - purchaseOrderType
+      - quantity
+      - unitOfMeasureCode
+  PurchaseOrderEventDetailType:
     properties:
-      event: 
-        type: "string"
-        description: "Defines Event Type for Purchase Order"          
+      event:
+        type: string
+        description: Defines Event Type for Purchase Order
         minLength: 1
         maxLength: 10
-      purchaseOrderType: 
-        type: "string"
-        description: "Defines Purchase Order Type - Either PO or MISC"      
+      purchaseOrderType:
+        type: string
+        description: Defines Purchase Order Type - Either PO or MISC
         minLength: 1
-        maxLength: 10        
-      purchaseOrderNumber: 
-        type: "integer"
-        format: "int64"
-        description: "Defines Purchase Order Number"      
+        maxLength: 10
+      purchaseOrderNumber:
+        type: integer
+        format: int64
+        description: Defines Purchase Order Number
         minimum: 1
         maximum: 999999999999
-      miscPurchaseOrderNumber: 
-        type: "string"
-        description: "Defines MISC Purchase Order Number - Mandatory if PO Type is MISC"      
+      miscPurchaseOrderNumber:
+        type: string
+        description: Defines MISC Purchase Order Number - Mandatory if PO Type is MISC
         minLength: 1
         maxLength: 12
-      miscPurchaseOrderDescription: 
-        type: "string"
-        description: "Defines MISC Purchase Order Description - Mandatory if PO Type is MISC"      
+      miscPurchaseOrderDescription:
+        type: string
+        description: Defines MISC Purchase Order Description - Mandatory if PO Type is MISC
         minLength: 1
         maxLength: 25
-      miscPurchaseOrderNotes: 
-        type: "string"
-        description: "Defines MISC Purchase Order Notes - Mandatory if PO Type is MISC"      
+      miscPurchaseOrderNotes:
+        type: string
+        description: Defines MISC Purchase Order Notes - Mandatory if PO Type is MISC
         minLength: 1
         maxLength: 250
-      quantity: 
-        type: "number"
-        format: "float"
-        description: "Defines Unit of Measure Quantity"      
+      quantity:
+        type: number
+        format: float
+        description: Defines Unit of Measure Quantity
         minimum: 0.01
         maximum: 9999999.99
-      unitOfMeasureCode: 
-        type: "string"
-        description: "Defines Unit of Measure Code"          
+      unitOfMeasureCode:
+        type: string
+        description: Defines Unit of Measure Code
         minLength: 1
         maxLength: 5
-    required: 
-      - "event"
-      - "purchaseOrderType"
-      - "quantity"
-      - "unitOfMeasureCode" 
-  ComponentType: 
-    properties: 
-      name: 
-        type: "string"
-        description: "! not documented !"      
-      status: 
-        type: "string"
-        description: "! not documented !"      
-      responseTime: 
-        type: "integer"
-        format: "int32"
-        description: "! not documented !"      
-      errorDescription: 
+    required:
+      - event
+      - purchaseOrderType
+      - quantity
+      - unitOfMeasureCode
+  ComponentType:
+    properties:
+      name:
+        type: string
+        description: "! not documented !"
+      status:
+        type: string
+        description: "! not documented !"
+      responseTime:
+        type: integer
+        format: int32
+        description: "! not documented !"
+      errorDescription:
         $ref: "#/definitions/LocalizedStringType"
-        description: "! not documented !"          
-    required: 
-      - "name"      
-  ServiceResultContextType: 
-    properties: 
-      messageName: 
-        type: "string"
-        description: "A unique name describing the message. All messages of the same type should carry the same 'MesageName' value. "      
-      timestamp: 
-        type: "string"
-        format: "date-time"
-        description: "The time-stamp at which the message was created."      
-      sendingApplication: 
-        type: "string"
-        description: "The name of the client/application sending the message. It allows client to uniquely identify itself for tracking or logging purposes."      
-      trackingId: 
-        type: "string"
-        description: "A globally unique id used to identify and correlate the transaction through various layers of distributed architecture. All endpoints processing this message should propagate the same tracking id value to downstream service calls or created messages, and for request and response message pattern, the same tracking id value should be returned with the response message."      
-      statusMessage: 
+        description: "! not documented !"
+    required:
+      - name
+  ServiceResultContextType:
+    properties:
+      messageName:
+        type: string
+        description: "A unique name describing the message. All messages of the same
+          type should carry the same 'MesageName' value. "
+      timestamp:
+        type: string
+        format: date-time
+        description: The time-stamp at which the message was created.
+      sendingApplication:
+        type: string
+        description: The name of the client/application sending the message. It allows
+          client to uniquely identify itself for tracking or logging purposes.
+      trackingId:
+        type: string
+        description: A globally unique id used to identify and correlate the transaction
+          through various layers of distributed architecture. All endpoints
+          processing this message should propagate the same tracking id value to
+          downstream service calls or created messages, and for request and
+          response message pattern, the same tracking id value should be
+          returned with the response message.
+      statusMessage:
         $ref: "#/definitions/StatusMessageType"
-        description: "Reflects the overall status of the response."      
-      additionalStatusMessages: 
-        type: "array"
-        items: 
-          $ref: "#/definitions/StatusMessageType"        
-        description: " Reflects any additional associated status messages that need to be reflected back to the consumer."          
-    required: 
-      - "statusMessage"      
-  RegionArrayType: 
-    properties: 
-      code: 
-        type: "string"
-        description: "Defines Region Code (Abbreviation)"      
+        description: Reflects the overall status of the response.
+      additionalStatusMessages:
+        type: array
+        items:
+          $ref: "#/definitions/StatusMessageType"
+        description: " Reflects any additional associated status messages that need to
+          be reflected back to the consumer."
+    required:
+      - statusMessage
+  RegionArrayType:
+    properties:
+      code:
+        type: string
+        description: Defines Region Code (Abbreviation)
         minLength: 1
         maxLength: 10
-      description: 
-        type: "string"
-        description: "Defines Region's Description"          
+      description:
+        type: string
+        description: Defines Region's Description
         minLength: 1
         maxLength: 40
-    required: 
-      - "code"
-      - "description"      
-  ItemArrayType: 
-    properties: 
+    required:
+      - code
+      - description
+  ItemArrayType:
+    properties:
       futureItemAppointment:
-        type: "array"
-        items: 
-          $ref: "#/definitions/AppointmentArrayType"        
-        description: "Defines an array of Time and Date Appointments"
-      itemNumber: 
-        type: "integer"
-        format: "int32"
-        description: "Defines Item Number"      
-      itemDescription1: 
-        type: "string"
-        description: "Defines Item Description 1 from INITMMP"      
-      itemDescription2: 
-        type: "string"
-        description: "Defines Item Description 2 from INITMMP"
-      itemQuantity: 
-        type: "string"
-        description: "Defines Item Quantity"      
+        type: array
+        items:
+          $ref: "#/definitions/AppointmentArrayType"
+        description: Defines an array of Time and Date Appointments
+      itemNumber:
+        type: integer
+        format: int32
+        description: Defines Item Number
+      itemDescription1:
+        type: string
+        description: Defines Item Description 1 from INITMMP
+      itemDescription2:
+        type: string
+        description: Defines Item Description 2 from INITMMP
+      itemQuantity:
+        type: string
+        description: Defines Item Quantity
       numberOfPallets:
-        type: "integer"
-        format: "int32"
-        description: "Defines Number of Pallets"
-      masterPackDescription: 
-        type: "string"
-        description: "Defines Master Pack Description"      
-      weight: 
-        type: "string"
-        description: "Defines Weight for PO Item"      
-      cube: 
-        type: "string"
-        description: "Defines Cube for PO Item"      
-      categoryDescription: 
-        type: "string"
-        description: "Defines PO Item Category Description"      
-      isFrozenItem: 
-        type: "boolean"
-        description: "Defines if it is a Frozen Item  Y/N"      
-      isRandomWeight: 
-        type: "boolean"
-        description: "Defines if it is a Random Weight Item  Y/N"
+        type: integer
+        format: int32
+        description: Defines Number of Pallets
+      masterPackDescription:
+        type: string
+        description: Defines Master Pack Description
+      weight:
+        type: string
+        description: Defines Weight for PO Item
+      cube:
+        type: string
+        description: Defines Cube for PO Item
+      categoryDescription:
+        type: string
+        description: Defines PO Item Category Description
+      isFrozenItem:
+        type: boolean
+        description: Defines if it is a Frozen Item  Y/N
+      isRandomWeight:
+        type: boolean
+        description: Defines if it is a Random Weight Item  Y/N
   AppointmentArrayType:
-    properties: 
+    properties:
       time:
-        type: "string"
-        format: "time"
-        description: "Defines Appointment time in HH:MM:SS format" 
+        type: string
+        format: time
+        description: Defines Appointment time in HH:MM:SS format
       date:
-        type: "string"
-        format: "date"
-        description: "Defines Appointment date in YYYY-MM-DD"
-  LocalizedStringType: 
-    properties: 
-      value: 
-        type: "string"
-        description: "! not documented !"      
-      localeCode: 
-        type: "string"
-        description: "! not documented !"          
-    required: 
-      - "value"
-      - "localeCode"      
-  StatusMessageType: 
-    properties: 
-      statusCode: 
-        type: "string"
-        description: "An enumeration value describing the overall nature of the message; the 'Information' and 'Warning' values should be reserved for 'AdditionalStatusMessage' element values."      
-      errorCode: 
-        type: "string"
-        description: "A code representing the error."      
-      description: 
+        type: string
+        format: date
+        description: Defines Appointment date in YYYY-MM-DD
+  LocalizedStringType:
+    properties:
+      value:
+        type: string
+        description: "! not documented !"
+      localeCode:
+        type: string
+        description: "! not documented !"
+    required:
+      - value
+      - localeCode
+  StatusMessageType:
+    properties:
+      statusCode:
+        type: string
+        description: An enumeration value describing the overall nature of the message;
+          the 'Information' and 'Warning' values should be reserved for
+          'AdditionalStatusMessage' element values.
+      errorCode:
+        type: string
+        description: A code representing the error.
+      description:
         $ref: "#/definitions/LocalizedStringType"
-        description: "Human-readable descriptive text corresponding to the 'ErrorCode' value provided."          
-    required: 
-      - "statusCode"
+        description: Human-readable descriptive text corresponding to the 'ErrorCode'
+          value provided.
+    required:
+      - statusCode
       
-    
