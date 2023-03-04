@@ -1,10 +1,11 @@
+---
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: Depot Application
   title: DepotAppointmentAPI
   description: Request to record Appointments.
-   links:
+  links:
     - url: https://github.com/swagger-api/swagger-petstore
       title: GitHub Repo
       icon: github
@@ -943,4 +944,3 @@ definitions:
           value provided.
     required:
       - statusCode
-      
