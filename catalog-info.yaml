@@ -8,3 +8,5 @@ spec:
   type: service
   owner: user:terryashley@costco.com
   lifecycle: production
+system:
+  name: testing environment
