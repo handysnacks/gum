@@ -8,4 +8,4 @@ spec:
   type: service
   owner: ecomm
   lifecycle: production
-  name: testing environment
+  system: testing
