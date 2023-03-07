@@ -5,6 +5,11 @@ metadata:
   title: HandySnakcs Sample # optional, human readable component name
   description: Handysnacks Configuration Files.
   consumesApis: petstore
+  tags: 
+    - GitHub
+    - JavaScript
+    - demo
+    - ecomm
 spec:
   type: service
   owner: ecomm
